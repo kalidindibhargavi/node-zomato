@@ -17,16 +17,29 @@ var callAPI = function(resource, qs, callback) {
     });
 };
 
-var Zomato = {
-    init : function(user_key) {
-        ACCESS_TOKEN = user_key;
-    },
+var Zomato = function (user_key) {
+    ACCESS_TOKEN = user_key;
 
-    verify: function () {
-        callAPI('categories', {}, function () {
-
+    this.verify = function(callback) {
+        callAPI('/categories', {}, function(error, response) {
+            if(error) {
+                callback(false);
+                return ;
+            }
+            callback(true);
         });
-    }
+    };
+
+    this.getCategories = function(callback) {
+        callAPI('/categories', {}, callback);
+    };
+
+    this.getCities = function(callback) {
+        callAPI('/cities', {}, callback);
+    };
+
+    
+
 };
 
 exports.Zomato = Zomato;
