@@ -30,6 +30,8 @@ var Zomato = function(user_key) {
         });
     };
 
+
+    // Common APIs
     this.getCategories = function(callback) {
         callAPI('/categories', {}, callback);
     };
@@ -46,6 +48,8 @@ var Zomato = function(user_key) {
         callAPI('/establishments', options, callback);
     };
 
+
+    // Location Specific APIs
     this.getGeoCode = function(latitide, longitude, callback) {
         callAPI('/geocode', {
             lat: latitide,
@@ -65,6 +69,30 @@ var Zomato = function(user_key) {
             entity_id: entityId,
             entity_type: entityType
         }, callback);
+    };
+
+
+    // Restraunt Specific APIs
+    this.getDailyMenu = function(restaurantId, callback) {
+        callAPI('/dailymenu', {
+            res_id: restaurantId
+        }, callback);
+    };
+
+    this.getRestaurant = function(restaurantId, callback) {
+        callAPI('/restarurant', {
+            res_id: restaurantId
+        }, callback);
+    };
+
+    this.getReviewsForRestaurant = function(restaurantId, options, callback) {
+        var qs = options;
+        qs.res_id = restaurantId;
+        callAPI('/reviews', qs, callback);
+    };
+
+    this.search = function(options, callback) {
+        callAPI('/reviews', options, callback);
     };
 
 };
