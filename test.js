@@ -1,10 +1,13 @@
 var ZomatoAPI = require(__dirname + '/index');
 
-var api = new ZomatoAPI('YOUR_API_KEY');
+var api = new ZomatoAPI('');
 
-// api.verify(function(isVerified) {
-//     console.log(isVerified);
-// });
+api.verify(function(isVerified) {
+    console.log(isVerified);
+    if(isVerified === false) {
+        process.exit();
+    }
+});
 
 api.getCategories(function(error, response) {
     if(error) {
